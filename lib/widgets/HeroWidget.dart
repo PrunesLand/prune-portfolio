@@ -8,17 +8,42 @@ class HeroWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: const EdgeInsets.all(16),
+      elevation: 6,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Stack(
             children: [
-              Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  image: const DecorationImage(
-                    image: AssetImage('assets/placeholder.jpg'),
-                    fit: BoxFit.cover,
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16),
+                ),
+                child: Container(
+                  height: 220,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/placeholder.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(16),
+                    ),
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        Colors.black.withOpacity(0.6),
+                        Colors.transparent,
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -27,16 +52,16 @@ class HeroWidget extends StatelessWidget {
                 left: 20,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text(
                       'Pranaya Anargya',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
-                        fontSize: 24,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       'Flutter Developer',
                       style: TextStyle(color: Colors.white70, fontSize: 18),
@@ -46,40 +71,48 @@ class HeroWidget extends StatelessWidget {
               ),
             ],
           ),
+
           const SizedBox(height: 16),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                icon: const Icon(EvaIcons.linkedin),
-                color: Colors.blue,
-                onPressed: () {},
-              ),
-              const SizedBox(width: 16),
-              IconButton(
-                icon: const Icon(EvaIcons.github),
-                color: Colors.black,
-                onPressed: () {},
-              ),
-              const SizedBox(width: 16),
-              IconButton(
-                icon: const Icon(CupertinoIcons.mail),
-                color: Colors.red,
-                onPressed: () {},
-              ),
+              _socialIcon(EvaIcons.linkedin, Colors.blue),
+              const SizedBox(width: 24),
+              _socialIcon(EvaIcons.github, Colors.black),
+              const SizedBox(width: 24),
+              _socialIcon(CupertinoIcons.mail, Colors.red),
             ],
           ),
-          const SizedBox(height: 16),
+
+          const SizedBox(height: 20),
+
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Text(
               'I am a passionate Flutter developer with a keen interest in building beautiful, responsive, and efficient mobile applications. My goal is to create impactful software solutions that enhance user experiences.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[800], fontSize: 16),
+              style: TextStyle(
+                color: Colors.grey[800],
+                fontSize: 16,
+                height: 1.5,
+              ),
             ),
           ),
+
+          const SizedBox(height: 24),
         ],
       ),
+    );
+  }
+
+  Widget _socialIcon(IconData icon, Color color) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color.withValues(alpha: 0.1),
+      ),
+      child: IconButton(icon: Icon(icon), color: color, onPressed: () {}),
     );
   }
 }
