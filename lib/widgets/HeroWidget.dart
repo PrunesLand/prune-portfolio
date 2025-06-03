@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -7,112 +6,85 @@ class HeroWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(16),
-      elevation: 6,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 8.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(16),
-                ),
-                child: Container(
-                  height: 220,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/placeholder.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(16),
-                    ),
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        Colors.black.withOpacity(0.6),
-                        Colors.transparent,
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 20,
-                left: 20,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Pranaya Anargya',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Flutter Developer',
-                      style: TextStyle(color: Colors.white70, fontSize: 18),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          // Profile picture
+          CircleAvatar(
+            radius: 60,
+            backgroundImage: const AssetImage('assets/placeholder.jpg'),
+            backgroundColor: Colors.cyan[100],
           ),
-
-          const SizedBox(height: 16),
-
+          const SizedBox(height: 20),
+          // Name/title
+          Text(
+            'Pranaya Anargya',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 28,
+              color: Colors.cyan[800],
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Flutter Developer',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: Colors.cyan[400],
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 18),
+          // Social links
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _socialIcon(EvaIcons.linkedin, Colors.blue),
+              _socialIcon(
+                EvaIcons.linkedin,
+                Colors.cyan[700]!,
+                'https://linkedin.com',
+              ),
               const SizedBox(width: 24),
-              _socialIcon(EvaIcons.github, Colors.black),
-              const SizedBox(width: 24),
-              _socialIcon(CupertinoIcons.mail, Colors.red),
+              _socialIcon(EvaIcons.github, Colors.black, 'https://github.com'),
             ],
           ),
-
-          const SizedBox(height: 20),
-
+          const SizedBox(height: 24),
+          // Description
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Text(
               'I am a passionate Flutter developer with a keen interest in building beautiful, responsive, and efficient mobile applications. My goal is to create impactful software solutions that enhance user experiences.',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Colors.grey[800],
-                fontSize: 16,
-                height: 1.5,
+                fontSize: 17,
+                height: 1.6,
               ),
             ),
           ),
-
-          const SizedBox(height: 24),
         ],
       ),
     );
   }
 
-  Widget _socialIcon(IconData icon, Color color) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color.withValues(alpha: 0.1),
+  Widget _socialIcon(IconData icon, Color color, String url) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(30),
+      onTap: () {
+        // TODO: Implement launch URL
+      },
+      child: Ink(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.08),
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, color: color, size: 28),
       ),
-      child: IconButton(icon: Icon(icon), color: color, onPressed: () {}),
     );
   }
 }

@@ -6,28 +6,52 @@ class ProjectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    final projects = const [
+      ProjectCardWidget(
+        title: 'Portfolio Website',
+        description:
+            'A personal website built using Flutter Web showcasing my work, experience, and contact information.',
+        imagePath: 'assets/portfolio.png',
+        githubUrl: 'https://github.com/yourname/portfolio',
+      ),
+      ProjectCardWidget(
+        title: 'Weather App',
+        description:
+            'A weather forecast app using OpenWeatherMap API with clean UI and geolocation support.',
+        imagePath: 'assets/weather_app.png',
+        githubUrl: 'https://github.com/yourname/weather_app',
+      ),
+    ];
+
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        child: Column(
-          children: const [
-            ProjectCardWidget(
-              title: 'Portfolio Website',
-              description:
-                  'A personal website built using Flutter Web showcasing my work, experience, and contact information.',
-              imagePath: 'assets/portfolio.png',
-              githubUrl: 'https://github.com/yourname/portfolio',
-              liveDemoUrl: 'https://yourname.dev',
-            ),
-            ProjectCardWidget(
-              title: 'Weather App',
-              description:
-                  'A weather forecast app using OpenWeatherMap API with clean UI and geolocation support.',
-              imagePath: 'assets/weather_app.png',
-              githubUrl: 'https://github.com/yourname/weather_app',
-            ),
-          ],
-        ),
+      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Projects', style: Theme.of(context).textTheme.headlineSmall),
+          const Divider(thickness: 1.2),
+          isMobile
+              ? Column(
+                children:
+                    projects
+                        .map(
+                          (p) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: p,
+                          ),
+                        )
+                        .toList(),
+              )
+              : Wrap(
+                spacing: 24,
+                runSpacing: 24,
+                children:
+                    projects
+                        .map((p) => SizedBox(width: 320, child: p))
+                        .toList(),
+              ),
+        ],
       ),
     );
   }

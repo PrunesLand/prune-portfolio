@@ -5,51 +5,74 @@ class ExperienceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(16),
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.white.withOpacity(0.7),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.cyan.withOpacity(0.07),
+              blurRadius: 18,
+              offset: const Offset(0, 8),
+            ),
+          ],
+          border: Border.all(color: Colors.cyan.withOpacity(0.10)),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 24),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Left side: Text content
+            // Timeline dot
+            Column(
+              children: [
+                Container(
+                  width: 16,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    color: Colors.cyan,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Container(
+                  width: 2,
+                  height: 60,
+                  color: Colors.cyan.withOpacity(0.2),
+                ),
+              ],
+            ),
+            const SizedBox(width: 24),
+            // Experience details
             Expanded(
-              flex: 3,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Work Place 1',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 6),
                   Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu metus arcu. Cras vestibulum massa eu turpis mollis, eu convallis libero cursus. Aenean id congue lorem. Integer eget congue tortor. Aenean id felis ac urna ullamcorper tristique vel sit amet ex. Integer facilisis congue nisl euismod volutpat. Phasellus bibendum erat non nisl finibus aliquam. Aenean placerat, urna vitae hendrerit semper, est dui facilisis odio, sit amet consectetur mi elit nec felis. Phasellus sagittis tortor at velit blandit ultricies. Nulla sapien felis, dictum id venenatis vitae, fermentum quis dolor.',
-                    softWrap: true,
-                    style: TextStyle(fontSize: 14),
+                    'Flutter Developer • 2022 - Present',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.cyan[700],
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Worked on cross-platform mobile apps using Flutter. Collaborated with designers and backend engineers to deliver seamless user experiences. Implemented REST API integration, state management, and CI/CD pipelines.',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.black87,
+                      fontSize: 15,
+                    ),
                   ),
                 ],
-              ),
-            ),
-
-            const SizedBox(width: 16),
-
-            // Right side: Image placeholder box
-            Expanded(
-              flex: 2,
-              child: Container(
-                height: 120,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Image Here',
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                ),
               ),
             ),
           ],
