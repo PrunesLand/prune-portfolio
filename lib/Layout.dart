@@ -17,8 +17,8 @@ class Layout extends StatelessWidget {
                 Column(
                   children: [
                     HeroWidget(),
-                    Experiencewidget(),
-                    Educationwidget(),
+                    ExperienceWidget(),
+                    EducationWidget(),
                     ProjectWidget(),
                   ],
                 ),
